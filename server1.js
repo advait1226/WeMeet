@@ -38,7 +38,7 @@ app.use(express.static('public'));
 app.use(morgan('dev')); 
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+
 
 
 //session cookie set up
