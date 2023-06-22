@@ -18,27 +18,7 @@
 <script  src="chat.js" defer></script>
 <script  src="whiteboard.js" defer ></script>
 
-<!-- <script  src="resize.js" defer></script> -->
-<!-- <script>
-    var vc = "";
-</script> -->
-    <!-- <style>
-        :root {
-        --r: vc;
-         
-      }
-      </style> -->
 
-<!-- <script>
-    // Get the root element
-    var r = document.querySelector(':root');
-      var len = document.getElementsByTagName("video").length;
-      if (len !=0) {
-          vc = 90 / len;
-      r.style.setProperty('--vc', vc);
-      }
-
-    </script> -->
 
     <style>
         #video-grid{
@@ -86,6 +66,7 @@
 
 .offcanvas {
         width: 100% !important;
+        height: 100% !important ;
 }
 
 </style>   
@@ -108,15 +89,15 @@
                      </div>
                      <div class="col btn-group">
                         <a href="#" class="btn btn-primary">hieee</a>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Whiteboard</button>
 
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas offcanvas-top" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Whiteboard</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <canvas id="canvas" style=" position: relative; width: 100%; height: 100% ; border:1px solid #000000;"></canvas>
+    <canvas id="canvas" style="border: 2px solid black;"></canvas>
 
   </div>
 </div>
