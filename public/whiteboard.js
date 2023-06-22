@@ -1,6 +1,6 @@
 let canvas = document.getElementById('canvas');
-// canvas.width = '350px';
-// canvas.height = '400px';
+canvas.width = window.innerWidth*0.8;
+canvas.height = window.innerHeight*0.8;
 
 // const socket = io('/');
 
@@ -17,11 +17,11 @@ let mouseDown =  false;
 
 // process.setMaxListeners(0);
 
-canvas.onmousedown = (e) =>{
+window.onmousedown = (e) =>{
     console.log(mouseDown);
     ctx.moveTo(x, y);
     mouseDown = true;
-    // socket.emit('down', {x , y});
+    socket.emit('down', {x , y});
 
 };
 
@@ -45,19 +45,19 @@ socket.on('ondown', ({x , y})=>{
 
     window.onmousemove = function(e) {
 
-        var pos = getMousePos(canvas, e), /// provide this canvas and event
-            x = pos.x,
-            y = pos.y;
+        // var pos = getMousePos(canvas, e), /// provide this canvas and event
+        //     x = pos.x,
+        //     y = pos.y;
     
         /// check x and y against the grid
     
     
     /// the main function
-    // x = e.clientX;
-    // y = e.clientY;
+    x = e.clientX;
+    y = e.clientY - 55;
     if(mouseDown){
         // console.log(x, y);
-    // socket.emit('draw', {x , y});
+    socket.emit('draw', {x , y});
     ctx.lineTo(x , y);
     ctx.stroke();
     }
@@ -77,13 +77,13 @@ socket.on('ondown', ({x , y})=>{
 // }
 
 
-function  getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect(), // abs. size of element
-      scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for x
-      scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for y
+// function  getMousePos(canvas, evt) {
+//     var rect = canvas.getBoundingClientRect(), // abs. size of element
+//       scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for x
+//       scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for y
   
-    return {
-      x: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
-      y: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
-    }
-  }
+//     return {
+//       x: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
+//       y: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+//     }
+//   }
