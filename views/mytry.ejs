@@ -6,165 +6,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>gmeet clone</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-   <script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script>
     const ROOM_ID = "<%= roomId %>";
-    
-</script>
-<script defer src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-<script  src="/socket.io/socket.io.js" defer></script>
-<script  src="script.js" defer></script>
-<script  src="chat.js" defer></script>
-<script  src="whiteboard.js" defer ></script>
+    </script>
+    <script defer src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script  src="/socket.io/socket.io.js" defer></script>
+    <script  src="script.js" defer></script>
+    <script  src="chat.js" defer></script>
+    <script  src="whiteboard.js" defer ></script>
 
-<!-- <script  src="resize.js" defer></script> -->
-<!-- <script>
-    var vc = "";
-</script> -->
-    <!-- <style>
-        :root {
-        --r: vc;
-         
-      }
-      </style> -->
 
-<!-- <script>
-    // Get the root element
-    var r = document.querySelector(':root');
-      var len = document.getElementsByTagName("video").length;
-      if (len !=0) {
-          vc = 90 / len;
-      r.style.setProperty('--vc', vc);
-      }
 
-    </script> -->
+<style>
+  #video-grid{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+  video{
+    width : 45% ;
+    height :45%; 
+    object-fit: cover;
+    margin: 12px; 
+    resize :horizontal;
+    border-radius: 10px;
+    overflow: auto;
+  }
+  #output p{
+    padding: 14px 0px;
+    margin: 0 20px;
+    border-bottom: 1px solid #e9e9e9;
+    color: #f7f6f6;
+  }
+  #feedback p{
+    color: #aaa;
+    padding: 14px 0px;
+    margin: 0 20px;
+  }
 
-    <style>
-        #video-grid{
-            width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            overflow-y: auto;
-        
-        }
+  #output strong{
+    color: #e9f3e9;
+  }
 
-         video{
-             width : 45% ;
-            height :45%; 
-             object-fit: cover;
-            margin: 12px; 
-                resize :horizontal;
-                border-radius: 10px;
-                overflow: auto;
-            }
-
-        
-
-            #output p{
-        padding: 14px 0px;
-        margin: 0 20px;
-        border-bottom: 1px solid #e9e9e9;
-        color: #f7f6f6;
-    }
-
-    #feedback p{
-        color: #aaa;
-        padding: 14px 0px;
-        margin: 0 20px;
-    }
-
-    #output strong{
-        color: #e9f3e9;
-    }
-
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: rgb(240, 233, 233);
-     opacity: 1; /* Firefox */
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(240, 233, 233);
+    opacity: 1; /* Firefox */
 }
 
 .offcanvas {
-        width: 100% !important;
+  width: 100% !important;
+  height: 100% !important ;
 }
 
 </style>   
      
 </head>
-    <body>
-
-        <div class="container-fluid  mx-0 p-0  bg-secondary d-flex" style="height: 100vh;">
-            <!-- <div class="row align-items-start justify-content-between"> -->
-                <div class="col-9 bg-black d-flex flex-column flex-grow-1 position relative" style="max-height: 100vh;" >
-                    <div  class=" container-fluid p-3  flex-grow-1" >    
-                        <div  id="video-grid" class=" px-2 d-flex flex-grow-1 flex-wrap space-  justify-content-center align-items-center" >  </div>
-                    </div>
-                   <div class="row  my-2 mx-2  ">
-                     <div class="col btn-group">
-                        <a href="#" class="btn btn-primary"><%= roomId %></a>
-                        <a href="#" class="btn btn-warning">hieee</a>
-                        
-              
-                     </div>
-                     <div class="col btn-group">
-                        <a href="#" class="btn btn-primary">hieee</a>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
-
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Whiteboard</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <canvas id="canvas" style=" position: relative; width: 100%; height: 100% ; border:1px solid #000000;"></canvas>
-
-  </div>
-</div>
-                        <a href="#" class="btn btn-success">hieeee</a>
-              
-                     </div>
-                      <div class="col btn-group">
-                        <a href="#" class="btn btn-primary">hieee</a>
-                        <a href="#" class="btn btn-warning">hieee</a>
-                        <a href="#" class="btn btn-success">hieeee</a>
-              
-                     </div>
-                  </div>
-              </div>
-              <div class=" col-3 bg-grey d-flex flex-column" style=" resize: horizontal; height: 100vh;" id="chat_column">
-                    <div class="main__header">
-                       <h6 class="text-center">Chat</h6>
-                    </div>
-
-                    <div class="d-flex flex-column position-relative p-1.5 flex-grow-1 overflow-auto main__chat_window">
-                        <!-- <ul class="d-flex position-relative m-0 p-0" style="list-style: none; " id="output">
-                          
-                       </ul> -->
-                       <div id="output" class="container-fluid d-flex flex-column"></div>
-                       <div id = "feedback"></div>
-                    </div>
-                    <div class=" px-5 py-2 d-flex flex-column main__message_container">
-                        <input  class= "d-block flex-grow-1 bg-transparent text-white " id ="handle" type = "text" placeholder="Handle"/><br>
-                        <input  class= "flex-grow-1 bg-transparent text-white " id="message" type="text" placeholder="Type message here...">
-                     </div>   
-              </div>
-             </div> 
-            <!-- </div> -->
+    
+<body>
+  <div class="container-fluid  mx-0 p-0  bg-secondary d-flex" style="height: 100vh;">
+    <!-- <div class="row align-items-start justify-content-between"> -->
+    <div class="col-9 bg-black d-flex flex-column flex-grow-1 position relative" style="max-height: 100vh;" >
+      <div  class=" container-fluid p-3  flex-grow-1" >    
+          <div  id="video-grid" class=" px-2 d-flex flex-grow-1 flex-wrap space-  justify-content-center align-items-center" >           </div>
+        </div>
+        <div class="row  my-2 mx-2  ">
+          <div class="col btn-group">
+            <a href="#" class="btn btn-primary"><%= roomId %></a>
+            <a href="#" class="btn btn-danger">End Call</a>
           </div>
+          <div class="col btn-group">
+            <a href="#" class="btn btn-primary">hieee</a>
+            <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Whiteboard</button>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <div class="offcanvas offcanvas-top" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Whiteboard</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <canvas id="canvas" style="border: 2px solid black;"></canvas>
+              </div>
+            </div>
+            <a href="#" class="btn btn-success">hieeee</a>
+          </div>
+          <div class="col btn-group">
+            <a href="#" class="btn btn-primary">Mute</a>
+            <a href="#" class="btn btn-warning">Off Video</a>
+            <a href="#" class="btn btn-success">Off Mic</a>
+          </div>
+        </div>
+      </div>
+      <div class=" col-3 bg-grey d-flex flex-column" style=" resize: horizontal; height: 100vh;" id="chat_column">
+        <div class="main__header">
+            <h6 class="text-center">Chat</h6>
+        </div>
+      <div class="d-flex flex-column position-relative p-1.5 flex-grow-1 overflow-auto main__chat_window">
+      <!-- <ul class="d-flex position-relative m-0 p-0" style="list-style: none; " id="output">
+      </ul> -->
+      <div id="output" class="container-fluid d-flex flex-column"></div>
+      <div id = "feedback"></div>
+    </div>
+    <div class=" px-5 py-2 d-flex flex-column main__message_container">
+      <input  class= "d-block flex-grow-1 bg-transparent text-white " id ="handle" type = "text" placeholder="Handle"/><br>
+      <input  class= "flex-grow-1 bg-transparent text-white " id="message" type="text" placeholder="Type message here...">
+    </div>   
+  </div>
+</div> 
+<!-- </div> -->
+</div>
 
 
           
