@@ -42,12 +42,12 @@ message.addEventListener('keypress', (event)=>{
 socket.on('chat', (data)=>{
 
     if(data.handle == handle.value){
-    output.innerHTML += '<div class="d-flex flex-row justify-content-end"><p class= " small p-2 me-0 ms-6 mb-1 text-white rounded-3 " style="word-break: break-all; white-space: normal;min-width:125px ; max-width : 200px; background: #54B4D3"><strong>' + data.handle + ': </strong><br>'  + data.message + '</p></div>' ;
+    output.innerHTML += '<div class="d-flex flex-row justify-content-end"><p class= " small p-2 me-0 ms-6 mb-1 text-black rounded-3 " style="word-break: break-all; white-space: normal;min-width:125px ; max-width : 200px; background: #54B4D3"><strong>' + data.handle + ': </strong><br>'  + data.message + '</p></div>' ;
     // output.innerHTML += '<li class="chat_message d-block small p-2 ms-3  mb-1 text-white rounded-3 bg-info position-absolute end-5" style="min-width:150px;"><b>' + data.handle + '</b><br/>' + data.message +'</li>' ;
     }
 
     else{
-    output.innerHTML += '<div class="d-flex flex-row justify-content-start"><p class= "small p-2 ms-0 me-6 mb-1 text-black rounded-3 bg-white " style=" word-break: break-all; white-space: normal; max-width : 200px;min-width:125px;"><strong class="text-black">' + data.handle + ': </strong><br>' + data.message + '</p></div>' ;
+    output.innerHTML += '<div class="d-flex flex-row justify-content-start"><p class= "small p-2 ms-0 me-6 mb-1 text-black rounded-3 " style=" word-break: break-all; white-space: normal; max-width : 200px; min-width : 125px; background: #FAED26"><strong class="text-white">' + data.handle + ': </strong><br>' + data.message + '</p></div>' ;
         // output.innerHTML += '<li class="chat_message small p-2 me-3 mb-1 text-black rounded-3 bg-white position-absolute start-5" style="min-width:150px;"><b>' + data.handle + '</b><br/>' + data.message + '</li>' ;
 
 
@@ -68,9 +68,9 @@ socket.on('typing', (data)=>{
     }, 500);
 });
 
-const scrollToBottom = () => {
-    var d = $('.main__chat_window');
-    d.scrollTop(d.prop("scrollHeight"));
-  }
+// const scrollToBottom = () => {
+//     var d = $('.main__chat_window');
+//     d.scrollTop(d.prop("scrollHeight"));
+//   }
 
  
