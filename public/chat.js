@@ -4,7 +4,8 @@
 
 //query DOM
 var message = document.getElementById('message');
-var handle = document.getElementById('handle');
+// var handle = document.getElementById('handle');
+var handle = USER_NAME;
 // var btn = document.getElementById('send');
 var output = document.getElementById('output');
 var feedback = document.getElementById('feedback');
@@ -28,20 +29,20 @@ message.addEventListener('keypress', (event)=>{
     {
     socket.emit('chat', {
                 message: message.value,
-                handle: handle.value
+                handle: USER_NAME
             });
             message.value = "";
             // feedback.innerHTML = "";
         }
         else{
-            socket.emit('typing', handle.value);
+            socket.emit('typing', USER_NAME);
         }
         });
 
 //listen for events
 socket.on('chat', (data)=>{
 
-    if(data.handle == handle.value){
+    if(data.handle == USER_NAME){
     output.innerHTML += '<div class="d-flex flex-row justify-content-end"><p class= " small p-2 me-0 ms-6 mb-1 text-black rounded-3 " style="word-break: break-all; white-space: normal;min-width:125px ; max-width : 200px; background: #54B4D3"><strong>' + data.handle + ': </strong><br>'  + data.message + '</p></div>' ;
     // output.innerHTML += '<li class="chat_message d-block small p-2 ms-3  mb-1 text-white rounded-3 bg-info position-absolute end-5" style="min-width:150px;"><b>' + data.handle + '</b><br/>' + data.message +'</li>' ;
     }
@@ -65,7 +66,7 @@ socket.on('typing', (data)=>{
     feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
     const myTimeout = setTimeout(()=>{
         feedback.innerHTML= '';
-    }, 500);
+    }, 2400);
 });
 
 // const scrollToBottom = () => {
