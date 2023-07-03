@@ -92,7 +92,7 @@ app.get("/create", (req, res)=>{
 });
 
 app.get("/:room", (req, res)=>{
-  res.render('mytry', {roomId : req.params.room});
+  res.render('mytry', {roomId : req.params.room, user:req.user});
 });
 
 

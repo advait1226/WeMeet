@@ -50,6 +50,7 @@
         <nav>
             <ul>
                 <% if (user) { %>
+                    <li><a href="/create">Start Meet</a></li>
                     <li><a href="/auth/logout">Log out</a></li>
                     <% } else { %>
                     <li><a class="google-btn" href="/auth/google">Google+</a></li>
