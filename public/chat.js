@@ -4,25 +4,10 @@
 
 //query DOM
 var message = document.getElementById('message');
-// var handle = document.getElementById('handle');
 var handle = USER_NAME;
-// var btn = document.getElementById('send');
 var output = document.getElementById('output');
 var feedback = document.getElementById('feedback');
 
-//emit events
-// btn.addEventListener('click', ()=>{
-//     socket.emit('chat', {
-//         message: message.value,
-//         handle: handle.value
-//     });
-//     message.value = "";
-//     feedback.innerHTML= '';
-// });
-
-// message.addEventListener('keypress', ()=>{
-//     socket.emit('typing', handle.value);
-// });
 
 message.addEventListener('keypress', (event)=>{
     if( event.key =='Enter' && message.value.length != 0)
@@ -54,11 +39,6 @@ socket.on('chat', (data)=>{
 
     }
 
-// <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-white">
-//     <p class="small p-2 ms-3 mb-1 text-white rounded-3 bg-info">
-//         .tri-right.right-top
-
-
     scrollToBottom();
 });
 
@@ -69,9 +49,9 @@ socket.on('typing', (data)=>{
     }, 2400);
 });
 
-// const scrollToBottom = () => {
-//     var d = $('.main__chat_window');
-//     d.scrollTop(d.prop("scrollHeight"));
-//   }
+const scrollToBottom = () => {
+    var d = $('.main__chat_window');
+    d.scrollTop(d.prop("scrollHeight"));
+  }
 
  

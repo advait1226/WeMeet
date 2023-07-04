@@ -108,6 +108,7 @@ var io = socket(server);
 io.on('connection', (socket) => {
 
     console.log('made socket connection', socket.id);
+    socket.emit('your_id', socket.id);
 
     
 
@@ -120,28 +121,35 @@ io.on('connection', (socket) => {
         socket.join(roomId);
         socket.broadcast.to(roomId).emit('user-connected', userId);
 
+        // socket.on('video-off', (id, imog)=>{
+        //     socket.broadcast.to(roomId).emit('video-off', {id, imog});
+        // });
+        // socket.on('video-on', (id)=>{
+        //     socket.broadcast.to(roomId).emit('video-on', id);
+        // });
+
         // Handle chat event
 
     socket.on('chat', function(data){
-        io.sockets.emit('chat', data);
+        io.in(roomId).emit('chat', data);
     });
 
     socket.on('typing', (data)=>{
-        socket.broadcast.emit('typing', data)
+        socket.broadcast.to(roomId).emit('typing', data);
     });
    
     //whiteboard handler
 
     socket.on('draw' , (data) =>{
-                console.log("draw");
-                socket.broadcast.emit('ondraw', {x : data.x, y: data.y});
+                // console.log("draw");
+                socket.broadcast.to(roomId).emit('ondraw', {x : data.x, y: data.y});
           
     
     });
     
     
     socket.on('down', (data)=>{
-        console.log("down");
+        // console.log("down");
 
     socket.broadcast.emit('ondown', {x : data.x, y: data.y});
         
