@@ -83,9 +83,17 @@ app.get("/create", (req, res)=>{
     res.redirect(`/${shortid.generate()}`);
 });
 
+///REJECT ROUTE
+app.get("/rej", (req,res)=>{
+    res.render('reject');
+})
+
+
 app.get("/:room", (req, res)=>{
   res.render('mytry', {roomId : req.params.room, user:req.user});
 });
+
+
 
 
 //file route
@@ -123,7 +131,8 @@ app.post("/upload", upload.single('file'), async (req, res) => {
 
 
 // Socket setup & pass server
-
+var admin = {};
+var goo = {};
 var io = socket(server);
 io.on('connection', (socket) => {
 
@@ -135,11 +144,41 @@ io.on('connection', (socket) => {
 
     //handle video events
 
-    socket.on('join-room', (roomId, userId)=>{
-        console.log(roomId, userId);
+    socket.on('join-room', (roomId, name, googleId)=>{
+        // console.log(roomId, userId);
+        console.log(admin);
+        if(!admin[roomId] || admin[roomId].length == 0){
+        admin[roomId] = new Set();
+        goo[roomId] = new Set();
+        goo[roomId].add(googleId);
+        admin[roomId].add(socket.id);
+        // socket.join(roomId);
+        io.to(socket.id).emit('ok-join');
+        // socket.broadcast.to(roomId).emit('user-connected', userId);
+        }
+        else if(goo[roomId].has(googleId)){
+            admin[roomId].add(socket.id);
+            io.to(socket.id).emit('ok-join');
 
-        socket.join(roomId);
+        }
+        else{
+            io.to(admin[roomId].values().next().value).emit('wants to join', name, socket.id, googleId);
+        }
+
+        socket.on('ok-join', (id,googs) =>{
+            io.to(id).emit('ok-join');
+        });
+        socket.on('reject', (id)=>{
+            io.to(id).emit('reject');
+        })
+
+        socket.on('join', (roomId, userId, googs)=>{
+            admin[roomId].add(socket.id);
+            goo[roomId].add(googs);
+
+            socket.join(roomId);
         socket.broadcast.to(roomId).emit('user-connected', userId);
+        
 
         // socket.on('video-off', (id, imog)=>{
         //     socket.broadcast.to(roomId).emit('video-off', {id, imog});
@@ -183,11 +222,14 @@ io.on('connection', (socket) => {
 
 
    socket.on('disconnect', ()=>{
+    admin[roomId].delete(socket.id);
+    if(admin[roomId].size == 0) delete admin[roomId];
     socket.broadcast.to(roomId).emit('user-disconnected', userId);
-   });
+    })  
+
+});
    
     });
-
 
 
 

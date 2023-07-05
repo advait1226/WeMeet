@@ -1,8 +1,30 @@
 const socket = io('/');
+// import * as bootstrap from "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js";
+function okay(id, googleId) {
+    socket.emit('ok-join', id, googleId);
+}
 
+function nokay(id){
+    socket.emit('reject', id);
+}
+socket.emit('join-room', ROOM_ID, USER_NAME, goog);
+
+var screenSharing = false;
+const myVideo = document.createElement('video');
+var mystream;
+var myscreen;
+myVideo.muted = true
+const peers = {};
 const videoGrid = document.getElementById('video-grid');
+var myPeer;
+var gum = navigator.mediaDevices.getUserMedia;
+socket.on('reject', ()=>{
+    window.location.href = "/rej";
+});
+socket.on('ok-join', ()=>{
 
-var myPeer = new Peer(undefined, {
+
+ myPeer = new Peer(undefined, {
     host: '/',
     port: '4001',
     // iceServers: [
@@ -33,17 +55,11 @@ var myPeer = new Peer(undefined, {
       }
 )
 //undefined because we let peerjs choose userid for us
-var screenSharing = false;
-const myVideo = document.createElement('video');
-var mystream;
-var myscreen;
-myVideo.muted = true
-const peers = {};
-var gum = navigator.mediaDevices.getUserMedia;
+
 
 
 myPeer.on('open', id => { 
-    socket.emit('join-room', ROOM_ID, id);
+    socket.emit('join', ROOM_ID, id, goog);
     gum(
         {
             video : true,
@@ -76,7 +92,37 @@ myPeer.on('open', id => {
             if(peers[userId]) peers[userId].close()
         });
 
+        socket.on('wants to join', (name, id, googleId)=>{
 
+            var myModal = document.getElementById('myModal');
+            
+         myModal.innerHTML = 
+                `<div class="modal-dialog"><div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h3>${name} wants to join the meeting</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="okay('${id}', '${googleId}')" type="button" class="btn btn-default" data-bs-dismiss="modal">Allow</button>
+                        <button onclick="nokay('${id}')" type="button" class="btn btn-default" data-bs-dismiss="modal">Deny</button>
+                    </div>
+                </div>`;
+            var mod = new bootstrap.Modal(myModal);
+            mod.show();
+        })
+    
+    
+    
+    
+    }) //end of ok-join
+
+
+
+{
+
+}
 
 
 function connectToNewUser(userId, stream)
@@ -161,18 +207,18 @@ document.getElementById('video_button').innerHTML = html;
 function startScreenShare() {
     if (screenSharing) {
         
-        var element = document.getElementById('share');
-        element.parentNode.removeChild(element);
+        // var element = document.getElementById("share");
+        // element.parentElement.removeChild(element);
         stopScreenSharing()
     }
     else{
     navigator.mediaDevices.getDisplayMedia({ video: true }).then((stream) => {
         myscreen = stream;
-        const v = document.createElement('video')
-        v.setAttribute("id", "share");
+        // const v = document.createElement('video')
+        // v.setAttribute("id", "share");
         
-        let videoTrack = myscreen.getVideoTracks()[0];
-        addVideoStream(v, myscreen)
+        // let videoTrack = myscreen.getVideoTracks()[0];
+        // addVideoStream(v, myscreen)
         videoTrack.onended = () => {
             stopScreenSharing()
         }
