@@ -1,12 +1,6 @@
 const socket = io('/');
 // import * as bootstrap from "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js";
-function okay(id, googleId) {
-    socket.emit('ok-join', id, googleId);
-}
 
-function nokay(id){
-    socket.emit('reject', id);
-}
 socket.emit('join-room', ROOM_ID, USER_NAME, goog);
 
 var screenSharing = false;
@@ -59,7 +53,7 @@ socket.on('ok-join', ()=>{
 
 
 myPeer.on('open', id => { 
-    socket.emit('join', ROOM_ID, id, goog);
+    
     gum(
         {
             video : true,
@@ -67,16 +61,20 @@ myPeer.on('open', id => {
         }).then( stream => {
             mystream = stream;
             addVideoStream(myVideo, stream)
+            socket.emit('join', ROOM_ID, id, goog);
+
         });
+
 });
 
         myPeer.on('call', call =>{
             peers[call.peer] = call;
+            call.on('stream', userVideoStream => {
+                addVideoStream(video, userVideoStream)
+                })
             call.answer(mystream);
             const video = document.createElement('video')
-            call.on('stream', userVideoStream => {
-            addVideoStream(video, userVideoStream)
-            })
+            
             call.on('close', ()=>{
             video.remove() });
             
@@ -120,9 +118,13 @@ myPeer.on('open', id => {
 
 
 
-{
-
-}
+    function okay(id, googleId) {
+        socket.emit('ok-join', id, googleId);
+    }
+    
+    function nokay(id){
+        socket.emit('reject', id);
+    }
 
 
 function connectToNewUser(userId, stream)
