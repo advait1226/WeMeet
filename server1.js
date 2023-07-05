@@ -70,10 +70,7 @@ app.use(passport.initialize());
 
 //home route
 
-app.get("/", (req, res)=>{
-    res.render('login', { user: req.user});
-  // res.send('dcdc');
-});
+
 
 //auth routes
 app.use('/auth', authRoutes);
@@ -93,6 +90,12 @@ app.get("/:room", (req, res)=>{
   res.render('mytry', {roomId : req.params.room, user:req.user});
 });
 
+
+
+app.get("/", (req, res)=>{
+    res.render('home', { user: req.user});
+  // res.send('dcdc');
+});
 
 
 

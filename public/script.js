@@ -209,18 +209,18 @@ document.getElementById('video_button').innerHTML = html;
 function startScreenShare() {
     if (screenSharing) {
         
-        // var element = document.getElementById("share");
-        // element.parentElement.removeChild(element);
+        var element = document.getElementById("share");
+        element.parentElement.removeChild(element);
         stopScreenSharing()
     }
     else{
     navigator.mediaDevices.getDisplayMedia({ video: true }).then((stream) => {
         myscreen = stream;
-        // const v = document.createElement('video')
-        // v.setAttribute("id", "share");
+        const v = document.createElement('video')
+        v.setAttribute("id", "share");
         
         let videoTrack = myscreen.getVideoTracks()[0];
-        // addVideoStream(v, myscreen)
+        addVideoStream(v, myscreen)
         videoTrack.onended = () => {
             stopScreenSharing()
         }
