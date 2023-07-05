@@ -5,31 +5,31 @@ const videoGrid = document.getElementById('video-grid');
 var myPeer = new Peer(undefined, {
     host: '/',
     port: '4001',
-    iceServers: [
-            {
-              urls: "stun:stun.relay.metered.ca:80",
-            },
-            {
-              urls: "turn:a.relay.metered.ca:80",
-              username: "8776eeea3fab7a55c4c1e8e3",
-              credential: "nzBrP8BgSMLy17A6",
-            },
-            {
-              urls: "turn:a.relay.metered.ca:80?transport=tcp",
-              username: "8776eeea3fab7a55c4c1e8e3",
-              credential: "nzBrP8BgSMLy17A6",
-            },
-            {
-              urls: "turn:a.relay.metered.ca:443",
-              username: "8776eeea3fab7a55c4c1e8e3",
-              credential: "nzBrP8BgSMLy17A6",
-            },
-            {
-              urls: "turn:a.relay.metered.ca:443?transport=tcp",
-              username: "8776eeea3fab7a55c4c1e8e3",
-              credential: "nzBrP8BgSMLy17A6",
-            },
-        ],
+    // iceServers: [
+    //         {
+    //           urls: "stun:stun.relay.metered.ca:80",
+    //         },
+    //         {
+    //           urls: "turn:a.relay.metered.ca:80",
+    //           username: "8776eeea3fab7a55c4c1e8e3",
+    //           credential: "nzBrP8BgSMLy17A6",
+    //         },
+    //         {
+    //           urls: "turn:a.relay.metered.ca:80?transport=tcp",
+    //           username: "8776eeea3fab7a55c4c1e8e3",
+    //           credential: "nzBrP8BgSMLy17A6",
+    //         },
+    //         {
+    //           urls: "turn:a.relay.metered.ca:443",
+    //           username: "8776eeea3fab7a55c4c1e8e3",
+    //           credential: "nzBrP8BgSMLy17A6",
+    //         },
+    //         {
+    //           urls: "turn:a.relay.metered.ca:443?transport=tcp",
+    //           username: "8776eeea3fab7a55c4c1e8e3",
+    //           credential: "nzBrP8BgSMLy17A6",
+    //         },
+    //     ],
       }
 )
 //undefined because we let peerjs choose userid for us
@@ -161,18 +161,18 @@ document.getElementById('video_button').innerHTML = html;
 function startScreenShare() {
     if (screenSharing) {
         
-        // var element = document.getElementById('share');
-        // element.parentNode.removeChild(element);
+        var element = document.getElementById('share');
+        element.parentNode.removeChild(element);
         stopScreenSharing()
     }
     else{
     navigator.mediaDevices.getDisplayMedia({ video: true }).then((stream) => {
         myscreen = stream;
-        // const v = document.createElement('video')
-        // v.setAttribute("id", "share");
+        const v = document.createElement('video')
+        v.setAttribute("id", "share");
         
         let videoTrack = myscreen.getVideoTracks()[0];
-        // addVideoStream(v, myscreen)
+        addVideoStream(v, myscreen)
         videoTrack.onended = () => {
             stopScreenSharing()
         }

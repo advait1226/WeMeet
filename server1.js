@@ -1,4 +1,6 @@
 var express = require('express');
+const multer = require("multer");
+const File = require("./models/File")
 var socket = require('socket.io');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -6,8 +8,8 @@ const http = require('http');
 const authRoutes = require('./routes/authroutes');
 const passportSetup= require('./config/passport-setup');
 const keys= require('./config/keys');
-var os = require('os');
-const {v4 : uuidV4} = require('uuid');
+// var os = require('os');
+// const {v4 : uuidV4} = require('uuid');
 const shortid = require('shortid');
 const cookieSession= require('cookie-session');
 const passport= require('passport');
@@ -28,16 +30,12 @@ mongoose.connect(keys.mongoDB.dbURI, {useNewUrlParser: true, useUnifiedTopology:
 .catch((err)=> console.log(err) );
 
 
-
-// var server = app.listen(4000, function(){
-//     console.log('listening for requests on port 4000,');
-// });
-
 // Static files and middleware
 app.use(express.static('public'));
 app.use(morgan('dev')); 
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+const upload = multer({ dest: "uploads" })
 
 
 
@@ -70,18 +68,12 @@ app.use(passport.initialize());
 
 
 
-
+//home route
 
 app.get("/", (req, res)=>{
     res.render('login', { user: req.user});
   // res.send('dcdc');
 });
-
-
-// app.get("/meet", (req, res)=>{
-//     res.render('mytry');
-//   // res.send('dcdc');
-// });
 
 //auth routes
 app.use('/auth', authRoutes);
@@ -96,8 +88,36 @@ app.get("/:room", (req, res)=>{
 });
 
 
+//file route
 
+app.post("/upload", upload.single('file'), async (req, res) => {
+    console.log(req.file);
+    const fileData = {
+      path: req.file.path,
+      originalName: req.file.originalname,
+    }
+   
+  
+    const file = new File(fileData);
+    file.save().then((result) =>{
+  res.json( { fileLink: `${req.headers.origin}/file/${file.id}` })
+    })
+  })
 
+  app.route("/file/:id").get(handleDownload).post(handleDownload)
+
+  async function handleDownload(req, res) {
+    const file = await File.findById(req.params.id)
+    
+  
+    // file.downloadCount++
+    // await file.save()
+    // console.log(file.downloadCount)
+  
+    res.download(file.path, file.originalName)
+  }
+  
+  
 
 
 
@@ -132,6 +152,10 @@ io.on('connection', (socket) => {
 
     socket.on('chat', function(data){
         io.in(roomId).emit('chat', data);
+    });
+
+    socket.on('file', function(data){
+        io.in(roomId).emit('file', data);
     });
 
     socket.on('typing', (data)=>{
