@@ -219,7 +219,7 @@ function startScreenShare() {
         // const v = document.createElement('video')
         // v.setAttribute("id", "share");
         
-        // let videoTrack = myscreen.getVideoTracks()[0];
+        let videoTrack = myscreen.getVideoTracks()[0];
         // addVideoStream(v, myscreen)
         videoTrack.onended = () => {
             stopScreenSharing()
