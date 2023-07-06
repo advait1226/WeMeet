@@ -19,8 +19,8 @@ socket.on('ok-join', ()=>{
 
 
  myPeer = new Peer(undefined, {
-    host: '/',
-    port: '4001',
+    // host: '/',
+    // port: '4001',
     // iceServers: [
     //         {
     //           urls: "stun:stun.relay.metered.ca:80",
