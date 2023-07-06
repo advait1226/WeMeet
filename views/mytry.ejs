@@ -10,11 +10,22 @@
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script>
-      const ROOM_ID = "<%= roomId %>";
+      const ROOM_ID = "<%= roomId %>";</script>
+
+      <% if (user) { %>
+      <script>
       const goog = "<%= user.googleId%>";
       USER_NAME = "<%= user.username %>";
-      // const imog = "<%= user.thumbnail %>";
+      
       </script>
+      <% } else { %>
+        <script>
+          goog = "abc";
+          USER_NAME = "Anirudh";
+          
+          </script>
+          <% } %>
+
   
       <script defer src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
       <script  src="/socket.io/socket.io.js" defer></script>
@@ -136,7 +147,7 @@
         </div>
         <div class=" px-5 py-2 d-flex flex-column main__message_container">
           <!-- <input  class= "d-block flex-grow-1 bg-black text-white " id ="handle" type = "text" placeholder="Handle"/><br> -->
-          <!-- <img src="<%= user.thumbnail %>"/> -->
+          
           <input  class= "flex-grow-1 bg-black text-white " id="message" type="text" placeholder="Type message here..."><br>
           <!-- <form action="/upload" method="post" style="display: grid; gap: .5rem; grid-template-columns: auto 1fr; max-width: 500px; margin: 0 auto;" enctype="multipart/form-data"> -->
             <label for="file">File:</label>
