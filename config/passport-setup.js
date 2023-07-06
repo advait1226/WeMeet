@@ -22,7 +22,7 @@ passport.use(
         //options for the google strategy
         clientID: keys.google.client_id,
         clientSecret: keys.google.client_secret,
-        callbackURL: 'https://wemeet-2h6w.onrender.com//auth/google/redirect'
+        callbackURL: 'https://wemeet-2h6w.onrender.com/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done)=>{
         //passport callback function
          //check if user already exists
