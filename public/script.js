@@ -147,7 +147,7 @@ function addVideoStream(video, stream){
     video.addEventListener('loadedmetadata', ()=>{
         video.play()
     })
-    videoGrid.append(video);
+    videoGrid.appendChild(video);
 }
 
 
