@@ -2,7 +2,7 @@ const passport= require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys= require('./keys');
 const User = require('../models/user');
-
+require('dotenv').config();
 passport.serializeUser((user, done)=>{
     done(null, user.id); //pass user id in done method to jam in cookie
 });
@@ -20,8 +20,8 @@ passport.deserializeUser((id, done)=>{
 passport.use(
     new GoogleStrategy({
         //options for the google strategy
-        clientID: keys.google.client_id,
-        clientSecret: keys.google.client_secret,
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
         callbackURL: 'https://wemeet-2h6w.onrender.com/auth/google/redirect'
     }, (accessToken, refreshToken, profile, done)=>{
         //passport callback function

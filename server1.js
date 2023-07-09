@@ -13,17 +13,18 @@ const keys= require('./config/keys');
 const shortid = require('shortid');
 const cookieSession= require('cookie-session');
 const passport= require('passport');
+require("dotenv").config();
 
 
 // App setup
 var app = express();
 var server = http.Server(app);
 //connect to mongodb //listen for requests
-mongoose.connect(keys.mongoDB.dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 .then((result)=> {
     console.log('connected to mongodb');
-    server.listen(4000, ()=>{
-        console.log('app now listening for requests on port 4000')
+    server.listen(process.env.PORT || 3000, ()=>{
+        console.log(`app now listening for requests on port ${process.env.PORT || 3000}`)
     });
     
 })
@@ -42,7 +43,7 @@ const upload = multer({ dest: "uploads" })
 //session cookie set up
 app.use(cookieSession({ //encrypts cookie
     maxAge: 24*60*60*1000 , //milisecd for a day
-    keys: [keys.session.cookieKey]
+    keys: [process.env.COOKIE_KEY]
 }));
 
 // register regenerate & save after the cookieSession middleware initialization
