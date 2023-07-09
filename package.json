@@ -1,8 +1,8 @@
 {
-  "name": "webrtc",
+  "name": "wemeet",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server1.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
