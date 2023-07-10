@@ -26,16 +26,25 @@ Before running WeChat, ensure that you have the following software installed on 
 
 ## Installation
 
-To install the necessary dependencies, use the following command:
+1. Clone the repository:
 
+```bash
+git clone https://github.com/your-username/VigilanceLink.git
+```
+
+2. To install the necessary dependencies, use the following command:
+
+```bash
 `npm install`
-
+```
 
 ## Running the Server
 
-To start the WeChat server, use the following command:
+1. To start the WeChat server, use the following command:
 
+```bash
 `nodemon server1.js`
+```
 
 
 Make sure you run this command from the root directory of the project.
