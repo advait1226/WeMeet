@@ -10,6 +10,13 @@ WeChat is a real-time audio and video communication application with additional 
 - Screen sharing
 - File sharing
 
+## Snippets
+![IMG_20230711_022111](https://github.com/advait1226/WeMeet/assets/106689452/04d3d630-d1db-4770-b1a1-0ba66a215f93)
+![IMG_20230711_022733](https://github.com/advait1226/WeMeet/assets/106689452/8da71428-7afb-4d5c-9452-0fac2971f454)
+![image](https://github.com/advait1226/WeMeet/assets/106689452/7dfd6b9c-f382-4ed2-8c3e-72127bb5d856)
+
+
+
 ## Prerequisites
 
 Before running WeChat, ensure that you have the following software installed on your machine:
