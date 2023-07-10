@@ -29,7 +29,7 @@ Before running WeChat, ensure that you have the following software installed on 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/VigilanceLink.git
+git clone https://github.com/advait1226/VigilanceLink.git
 ```
 
 2. To install the necessary dependencies, use the following command:
