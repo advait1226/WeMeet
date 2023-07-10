@@ -13,18 +13,19 @@ const passportSetup= require('./config/passport-setup');
 const shortid = require('shortid');
 const cookieSession= require('cookie-session');
 const passport= require('passport');
-require("dotenv").config();
+require('dotenv').config();
 
 
 // App setup
 var app = express();
 var server = http.Server(app);
+const port = process.env.PORT || 3000;
 //connect to mongodb //listen for requests
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 .then((result)=> {
     console.log('connected to mongodb');
-    server.listen(process.env.PORT || 3000, ()=>{
-        console.log(`app now listening for requests on port ${process.env.PORT || 3000}`)
+    server.listen(port , ()=>{
+        console.log(`app now listening for requests on port ${port}`)
     });
     
 })
