@@ -1,6 +1,6 @@
-# WeChat
+# WeMeet
 
-WeChat is a real-time audio and video communication application with additional features such as chatting, collaborative whiteboard, screen sharing, and file sharing. This GitHub repository contains the source code for the WeChat application, which is built using webRTC technology.
+WeMeet is a real-time audio and video communication application with additional features such as chatting, collaborative whiteboard, screen sharing, and file sharing. This GitHub repository contains the source code for the WeMeet application, which is built using webRTC technology.
 
 ## Features
 
@@ -21,7 +21,7 @@ WeChat is a real-time audio and video communication application with additional 
 
 ## Prerequisites
 
-Before running WeChat, ensure that you have the following software installed on your machine:
+Before running WeMeet, ensure that you have the following software installed on your machine:
 
 - Node.js (version 10 or higher)
 - npm (Node Package Manager)
@@ -42,7 +42,7 @@ git clone https://github.com/advait1226/WeMeet.git
 
 ## Running the Server
 
-1. To start the WeChat server, use the following command:
+1. To start the WeMeet server, use the following command:
 
 ```bash
 `nodemon server1.js`
@@ -53,11 +53,11 @@ Make sure you run this command from the root directory of the project.
 
 ## Usage
 
-After starting the server, you can access the WeChat application by opening a web browser and navigating to the provided URL. The application should be up and running, allowing you to use all the available features.
+After starting the server, you can access the WeMeet application by opening a web browser and navigating to the provided URL. The application should be up and running, allowing you to use all the available features.
 
 ## Contributing
 
-We welcome contributions to improve WeChat and make it even better. If you want to contribute to this project, please follow these steps:
+We welcome contributions to improve WeMeet and make it even better. If you want to contribute to this project, please follow these steps:
 
 1. Fork the repository on GitHub.
 2. Create a new branch for your feature or bug fix.
@@ -73,11 +73,11 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use and 
 
 ## Support
 
-If you encounter any issues or have any questions regarding the WeChat application, please open an issue on the GitHub repository. We will be happy to assist you.
+If you encounter any issues or have any questions regarding the WeMeet application, please open an issue on the GitHub repository. We will be happy to assist you.
 
 ## Acknowledgements
 
-WeChat relies on several open-source projects and libraries. We would like to express our gratitude to the developers and contributors of those projects for their valuable work.
+WeMeet relies on several open-source projects and libraries. We would like to express our gratitude to the developers and contributors of those projects for their valuable work.
 
 - [webRTC](https://webrtc.org/)
 - [PeerJS](https://peerjs.com/)
@@ -89,10 +89,15 @@ WeChat relies on several open-source projects and libraries. We would like to ex
 
 For any further information or inquiries, please contact:
 
-Advaitaa Arun
-Email: advaitaa26@gmail.com
+**Advaitaa Arun**
+
+**Email: advaitaa26@gmail.com**
+
+**Kishan Kumar**
+
+**Email: k.kishan@iitg.ac.in**
 
 ---
-Thank you for using WeChat! We hope you find it useful and enjoy its features.
+Thank you for using WeMeet! We hope you find it useful and enjoy its features.
 
 
